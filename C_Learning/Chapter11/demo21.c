@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define LIM 30
+char * s_gets(char *, int n);
+int main()
+{
+    char number[LIM];
+    char *end;
+    long value;
+    puts("Enter a number (empty line to quit)!");
+    while(s_gets(number, LIM) && number[0]!='\0')
+    {
+        value = strtol(number, &end, 10);
+        printf("base 10 input, base 10 output:%ld, stopped at %s(%d)\n", value, end, *end);
+        value = strtol(number, &end, 16);
+        printf("base 16 input, base 10 output:%ld, stopped at %s(%d)\n", value, end, *end); 
+        puts("Next number: ");       
+    }
+    puts("Bye.");
+    return 0;
+}
+
+
+// char *s_gets(char *string, int n)
+// {
+//     char *ret_val;
+//     int i=0;
+//     ret_val = fgets(string, LIM, stdin);
+//     if(ret_val)
+//     {
+//         while(string[i]!='\n'&&string[i]!='\0')
+//             i++;
+//         if(string[i]=='\n')
+//             string[i] = '\0';
+//         else
+//             while (getchar()!='\n')
+//             {
+//                 continue;
+//             }
+            
+//     }
+//     return ret_val;
+// }
+
+char *s_gets(char *string, int n)
+{
+    char *ret_val;
+    ret_val = fgets(string, LIM, stdin);
+    if(ret_val)
+    {
+        while(*string!='\n'&&*string!='\0')
+            string++;
+        if(*string=='\n')
+            *string = '\0';
+        else
+            while (getchar()!='\n')
+            {
+                continue;
+            }    
+    }
+    return ret_val;
+}
